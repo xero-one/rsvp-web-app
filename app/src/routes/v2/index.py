@@ -42,7 +42,7 @@ v2_router = APIRouter(prefix="/v2")
 
 
 @v2_router.post("/rsvp", response_class=HTMLResponse, status_code=200)
-@limiter.limit("10/minute")
+@limiter.limit("50/minute")
 def get_rsvp_data(
     request: Request,
     first_name: str = Form(min_length=1, max_length=250),

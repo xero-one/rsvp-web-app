@@ -21,7 +21,7 @@ router = APIRouter(tags=["views"])
 
 # Home page
 @router.get("/", response_class=HTMLResponse)
-@limiter.limit("10/minute")
+@limiter.limit("50/minute")
 def home_page(request: Request) -> HTMLResponse:
     detailed_event_date = " ".join([ RSVP_EVENT_DATE.strip(), RSVP_EVENT_TIME_ZONE.strip() ])
     rsvp_end_date = parse_rsvp_date(date_str=RSVP_EVENT_DATE) if RSVP_EVENT_DATE else RSVP_EVENT_DATE
