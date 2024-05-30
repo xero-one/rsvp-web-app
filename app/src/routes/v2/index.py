@@ -21,6 +21,7 @@ from src.repository.attendees import AttendeesRepository
 from src.controllers.AttendeeDomain import AttendeeDomainController
 from src.utils.lib import base_url
 from config import (
+    END_POINT_RATE_LIMIT,
     RSVP_EVENT_DATE,
     RSVP_EVENT_TIME_ZONE,
     RSVP_GMAIL,
@@ -42,7 +43,7 @@ v2_router = APIRouter(prefix="/v2")
 
 
 @v2_router.post("/rsvp", response_class=HTMLResponse, status_code=200)
-@limiter.limit("50/minute")
+@limiter.limit(limit_value=f"{END_POINT_RATE_LIMIT}/minute", error_message="Please slow down form submissions.")
 def get_rsvp_data(
     request: Request,
     first_name: str = Form(min_length=1, max_length=250),

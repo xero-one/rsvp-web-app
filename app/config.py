@@ -45,6 +45,8 @@ origins = [
     f"http://localhost:{PROD_PORT}"
 ]
 
+PAGE_RATE_LIMIT = 50
+END_POINT_RATE_LIMIT = 5
 
 # Customize FastAPI's default logger dictionary can also be used in python "logger" module
 FASTAPI_LOG_CONFIG: dict[str, Any] = {

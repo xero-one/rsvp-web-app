@@ -1440,7 +1440,7 @@
                         (err)=>{ 
                             rsvpButn.setAttribute("value", originalData.rsvpButnText);
                             rsvpButn.disabled = false;
-                            Swal.fire(SWAL_DEFAULT_CONFIG("Something went wrong. Please try laters.")) 
+                            Swal.fire(SWAL_DEFAULT_CONFIG("Something went wrong. Please try later.")) 
                         }
                     )
                     .then(
@@ -1450,6 +1450,7 @@
                             const OK = responsejson.ok;
                             const code = responsejson.code;
                             const message = responsejson.message;
+                            const error = responsejson?.error;
 
                             if (OK && code === 200) {
                                 Swal.fire(
@@ -1457,7 +1458,7 @@
                                 );
                                 formEl.reset();
                             } else {
-                                const failureReason = message && typeof message === "string"? message : "Something went wrong. Please try again." 
+                                const failureReason = message && typeof message === "string"? message :  error? error : "Something went wrong. Please try again." 
                                 Swal.fire(SWAL_DEFAULT_CONFIG( failureReason ));  
                             }
                         }

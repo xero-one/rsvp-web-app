@@ -6,6 +6,7 @@ from src.repository.attendees import AttendeesRepository
 from src.controllers.AttendeeDomain import AttendeeDomainController
 from config import ( 
     html_page_templates,
+    PAGE_RATE_LIMIT,
     RSVP_EVENT_DATE,
     RSVP_LIMIT,
     RSVP_EVENT_TIME_ZONE
@@ -21,7 +22,7 @@ router = APIRouter(tags=["views"])
 
 # Home page
 @router.get("/", response_class=HTMLResponse)
-@limiter.limit("50/minute")
+@limiter.limit(limit_value=f"{PAGE_RATE_LIMIT}/minute")
 def home_page(request: Request) -> HTMLResponse:
     detailed_event_date = " ".join([ RSVP_EVENT_DATE.strip(), RSVP_EVENT_TIME_ZONE.strip() ])
     rsvp_end_date = parse_rsvp_date(date_str=RSVP_EVENT_DATE) if RSVP_EVENT_DATE else RSVP_EVENT_DATE
